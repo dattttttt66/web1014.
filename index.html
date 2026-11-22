@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Lab 04 - JavaScript</title>
+</head>
+
+<body>
+
+    <h1>LAB 04 - LẬP TRÌNH CƠ SỞ VỚI JAVASCRIPT</h1>
+
+    <!-- BÀI 1 -->
+    <h2>BÀI 1: Thao tác với mảng shoppingList</h2>
+
+    <button onclick="bai1()">Chạy Bài 1</button>
+
+    <p id="ketqua1"></p>
+
+    <hr>
+
+    <!-- BÀI 2 -->
+    <h2>BÀI 2: Lọc số chẵn và nhân đôi</h2>
+
+    <button onclick="bai2()">Chạy Bài 2</button>
+
+    <p id="ketqua2"></p>
+
+    <hr>
+
+    <!-- BÀI 3 -->
+    <h2>BÀI 3: Xử lý danh sách sinh viên</h2>
+
+    <button onclick="bai3()">Chạy Bài 3</button>
+
+    <p id="ketqua3"></p>
+
+    <hr>
+
+    <!-- BÀI 4 -->
+    <h2>BÀI 4: Sắp xếp sản phẩm theo giá</h2>
+
+    <button onclick="bai4()">Chạy Bài 4</button>
+
+    <p id="ketqua4"></p>
+
+    <hr>
+
+    <!-- BÀI 5 -->
+    <h2>BÀI 5: Quản lý sản phẩm cửa hàng</h2>
+
+    <button onclick="bai5()">Chạy Bài 5</button>
+
+    <p id="ketqua5"></p>
+
+    <hr>
+
+    <!-- BÀI 6 -->
+    <h2>BÀI 6: Tạo dữ liệu giả 100 sinh viên</h2>
+
+    <button onclick="bai6()">Chạy Bài 6</button>
+
+    <p id="ketqua6"></p>
+
+
+    <script>
+
+        // =========================
+        // BÀI 1
+        // =========================
+
+        function bai1() {
+
+            let shoppingList = ["Táo", "Cam", "Chuối", "Nho"];
+
+            let ketqua = "";
+
+            // a. In số lượng mặt hàng ban đầu
+            ketqua += "a. Số lượng ban đầu: " + shoppingList.length + "<br>";
+
+            // b. Thêm Sữa vào cuối danh sách
+            shoppingList.push("Sữa");
+
+            // c. Thêm Bánh mì vào đầu danh sách
+            shoppingList.unshift("Bánh mì");
+
+            // d. Xóa mặt hàng cuối cùng
+            let deletedItem = shoppingList.pop();
+
+            ketqua += "d. Mặt hàng đã xóa: " + deletedItem + "<br>";
+
+            // e. In mặt hàng thứ 2
+            ketqua += "e. Mặt hàng thứ 2: " + shoppingList[1] + "<br>";
+
+            ketqua += "Danh sách cuối cùng: " + shoppingList;
+
+            document.getElementById("ketqua1").innerHTML = ketqua;
+        }
+
+
+        // =========================
+        // BÀI 2
+        // =========================
+
+        function bai2() {
+
+            let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+            // a. Lọc số chẵn
+            let evenNumbers = numbers.filter(function(number) {
+                return number % 2 == 0;
+            });
+
+            // b. Nhân đôi số chẵn
+            let doubledEvenNumbers = evenNumbers.map(function(number) {
+                return number * 2;
+            });
+
+            let ketqua = "";
+
+            ketqua += "Mảng ban đầu: " + numbers + "<br>";
+
+            ketqua += "Các số chẵn: " + evenNumbers + "<br>";
+
+            ketqua += "Các số chẵn sau khi nhân đôi: " + doubledEvenNumbers;
+
+            document.getElementById("ketqua2").innerHTML = ketqua;
+        }
+
+
+        // =========================
+        // BÀI 3
+        // =========================
+
+        function bai3() {
+
+            let students = [
+                { name: "An", score: 8.2 },
+                { name: "Bình", score: 7.5 },
+                { name: "Chi", score: 9.1 },
+                { name: "Duy", score: 6.8 },
+                { name: "Hà", score: 8.7 },
+                { name: "Khánh", score: 5.9 },
+                { name: "Lan", score: 7.8 },
+                { name: "Minh", score: 9.4 },
+                { name: "Ngọc", score: 6.5 },
+                { name: "Quân", score: 8.0 }
+            ];
+
+            let ketqua = "";
+
+            // a. Lọc sinh viên có điểm lớn hơn 8
+            let goodStudents = students.filter(function(student) {
+                return student.score > 8;
+            });
+
+            ketqua += "a. Sinh viên có điểm trên 8:<br>";
+
+            goodStudents.forEach(function(student) {
+                ketqua += student.name + " - " + student.score + "<br>";
+            });
+
+
+            // b. Tìm sinh viên có điểm cao nhất
+            let bestStudent = students[0];
+
+            students.forEach(function(student) {
+                if (student.score > bestStudent.score) {
+                    bestStudent = student;
+                }
+            });
+
+            ketqua += "<br>b. Sinh viên điểm cao nhất: ";
+            ketqua += bestStudent.name + " - " + bestStudent.score + "<br>";
+
+
+            // c. Tính điểm trung bình
+            let totalScore = students.reduce(function(total, student) {
+                return total + student.score;
+            }, 0);
+
+            let averageScore = totalScore / students.length;
+
+            ketqua += "c. Điểm trung bình: " + averageScore.toFixed(2) + "<br>";
+
+
+            // d. Tạo mảng chỉ chứa tên sinh viên
+            let studentNames = students.map(function(student) {
+                return student.name;
+            });
+
+            ketqua += "d. Danh sách tên: " + studentNames + "<br>";
+
+
+            // e. Sắp xếp điểm giảm dần
+            let sortedStudents = [...students];
+
+            sortedStudents.sort(function(a, b) {
+                return b.score - a.score;
+            });
+
+            ketqua += "<br>e. Danh sách điểm giảm dần:<br>";
+
+            sortedStudents.forEach(function(student) {
+                ketqua += student.name + " - " + student.score + "<br>";
+            });
+
+            document.getElementById("ketqua3").innerHTML = ketqua;
+        }
+
+
+        // =========================
+        // BÀI 4
+        // =========================
+
+        function bai4() {
+
+            let products = [
+                { name: "Laptop", price: 1200 },
+                { name: "Mouse", price: 30 },
+                { name: "Keyboard", price: 75 },
+                { name: "Monitor", price: 300 }
+            ];
+
+            // a. Sắp xếp giá tăng dần
+            products.sort(function(a, b) {
+                return a.price - b.price;
+            });
+
+            // b. In danh sách sản phẩm
+            let ketqua = "Danh sách sản phẩm sau khi sắp xếp:<br>";
+
+            products.forEach(function(product) {
+                ketqua += product.name + " - Giá: " + product.price + "<br>";
+            });
+
+            document.getElementById("ketqua4").innerHTML = ketqua;
+        }
+
+
+        // =========================
+        // BÀI 5
+        // =========================
+
+        function bai5() {
+
+            // Quản lý sản phẩm cửa hàng điện thoại
+            let products = [
+                { name: "iPhone 15", price: 18000000, quantity: 5 },
+                { name: "Samsung S24", price: 16000000, quantity: 3 },
+                { name: "Oppo A58", price: 4500000, quantity: 8 },
+                { name: "Xiaomi Redmi", price: 5500000, quantity: 0 },
+                { name: "iPhone 16", price: 22000000, quantity: 2 }
+            ];
+
+            let ketqua = "";
+
+            // a. Hiển thị danh sách sản phẩm
+            ketqua += "a. Danh sách sản phẩm:<br>";
+
+            products.forEach(function(product) {
+                ketqua += product.name + " - Giá: " +
+                    product.price + " - Số lượng: " +
+                    product.quantity + "<br>";
+            });
+
+
+            // b. Lọc sản phẩm có giá trên 5 triệu
+            let expensiveProducts = products.filter(function(product) {
+                return product.price > 5000000;
+            });
+
+            ketqua += "<br>b. Sản phẩm trên 5 triệu:<br>";
+
+            expensiveProducts.forEach(function(product) {
+                ketqua += product.name + " - " +
+                    product.price + "<br>";
+            });
+
+
+            // c. Tính tổng giá trị hàng tồn kho
+            let totalValue = products.reduce(function(total, product) {
+                return total + product.price * product.quantity;
+            }, 0);
+
+            ketqua += "<br>c. Tổng giá trị tồn kho: " +
+                totalValue.toLocaleString("vi-VN") + " VND<br>";
+
+
+            // d. Tìm sản phẩm có giá cao nhất
+            let mostExpensive = products[0];
+
+            products.forEach(function(product) {
+                if (product.price > mostExpensive.price) {
+                    mostExpensive = product;
+                }
+            });
+
+            ketqua += "d. Sản phẩm đắt nhất: " +
+                mostExpensive.name + "<br>";
+
+
+            // e. Lọc sản phẩm còn hàng
+            let availableProducts = products.filter(function(product) {
+                return product.quantity > 0;
+            });
+
+            ketqua += "<br>e. Sản phẩm còn hàng:<br>";
+
+            availableProducts.forEach(function(product) {
+                ketqua += product.name + " - Số lượng: " +
+                    product.quantity + "<br>";
+            });
+
+            document.getElementById("ketqua5").innerHTML = ketqua;
+        }
+
+
+        // =========================
+        // BÀI 6
+        // =========================
+
+        function bai6() {
+
+            let students = [];
+
+            let names = [
+                "Nguyễn Văn An",
+                "Trần Thị Bình",
+                "Lê Văn Cường",
+                "Phạm Thị Dung",
+                "Hoàng Văn Đức",
+                "Vũ Thị Hà",
+                "Đặng Văn Hùng",
+                "Bùi Thị Lan",
+                "Đỗ Văn Minh",
+                "Ngô Thị Ngọc"
+            ];
+
+            let majors = [
+                "Marketing",
+                "Công nghệ thông tin",
+                "Thiết kế đồ họa",
+                "Quản trị kinh doanh"
+            ];
+
+            // Tạo 100 sinh viên
+            for (let i = 1; i <= 100; i++) {
+
+                let student = {
+                    id: "SV" + String(i).padStart(3, "0"),
+
+                    name: names[(i - 1) % names.length] + " " + i,
+
+                    age: Math.floor(Math.random() * 8) + 18,
+
+                    gender: i % 2 == 0 ? "Nữ" : "Nam",
+
+                    major: majors[Math.floor(Math.random() * majors.length)],
+
+                    score: Number((Math.random() * 10).toFixed(1))
+                };
+
+                students.push(student);
+            }
+
+            let ketqua = "";
+
+            // a. In số lượng sinh viên
+            ketqua += "a. Tổng số sinh viên: " + students.length + "<br>";
+
+
+            // b. In 10 sinh viên đầu tiên
+            ketqua += "<br>b. Danh sách 10 sinh viên đầu tiên:<br>";
+
+            for (let i = 0; i < 10; i++) {
+
+                ketqua += students[i].id + " - " +
+                    students[i].name + " - " +
+                    students[i].age + " tuổi - " +
+                    students[i].gender + " - " +
+                    students[i].major + " - Điểm: " +
+                    students[i].score + "<br>";
+            }
+
+
+            // c. Lọc sinh viên có điểm từ 8 trở lên
+            let goodStudents = students.filter(function(student) {
+                return student.score >= 8;
+            });
+
+            ketqua += "<br>c. Số sinh viên đạt từ 8 điểm: " +
+                goodStudents.length + "<br>";
+
+
+            // d. Tính điểm trung bình
+            let totalScore = students.reduce(function(total, student) {
+                return total + student.score;
+            }, 0);
+
+            let averageScore = totalScore / students.length;
+
+            ketqua += "d. Điểm trung bình: " +
+                averageScore.toFixed(2) + "<br>";
+
+
+            // e. Sắp xếp sinh viên theo điểm giảm dần
+            let sortedStudents = [...students];
+
+            sortedStudents.sort(function(a, b) {
+                return b.score - a.score;
+            });
+
+            ketqua += "<br>e. Top 5 sinh viên có điểm cao nhất:<br>";
+
+            for (let i = 0; i < 5; i++) {
+
+                ketqua += sortedStudents[i].name +
+                    " - Điểm: " + sortedStudents[i].score + "<br>";
+            }
+
+            document.getElementById("ketqua6").innerHTML = ketqua;
+
+            // In toàn bộ 100 sinh viên trong Console
+            console.log("Danh sách 100 sinh viên:", students);
+        }
+
+    </script>
+
+</body>
+</html>
